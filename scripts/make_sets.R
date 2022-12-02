@@ -1,20 +1,33 @@
 #!/usr/bin/env Rscript
 
+#support function
+calc_support <- function(featuretable, id_col, support_threshold){
+  ft <- as.data.frame(featuretable) %>%
+    select(-all_of(id_col))
+  
+  support <- apply(ft, 1, function(x) sum(x)/ncol(ft))
+  
+  out_ft <- cbind(support, featuretable) %>%
+    filter(support >= support_threshold)
+  
+  return(out_ft)
+}
+
 main <- function(){
 	
 	args <- commandArgs(trailingOnly = TRUE)
-
-        if(args[1] == "--help" | args[1] == "-h"){
-                help_msg <- c("\n",
-		  "Function creats all possible combinations of id's in id column",
-		  "\tPositional arguments are:",
+  if(args[1] == "--help" | args[1] == "-h"){
+    help_msg <- c("\n",
+                  "Function creats all possible combinations of id's in id column",
+                  "\tPositional arguments are:",
                   "\t[1] path to file (tsv)",
                   "\t[2] id column name",
                   "\t[3] number of cores",
                   "\t[4] minimum number of items in set",
                   "\t[5] maximum number of items in set",
-		  "\n"
-		)
+                  "\t[6] support threshold (0-1)",
+                  "Output to stdout",
+                  "\n")
               
 		cat(help_msg, sep = "\n")
 
@@ -23,25 +36,33 @@ main <- function(){
   			on.exit(options(opt))
   			stop()
 		}
-
 		stop_quietly() 
-        }
+  }
 
-	library(tidyverse)
-	library(furrr)
-	library(gtools)	
-
+	#prep environment
+	library(tidyverse, quietly = TRUE, warn.conflicts = FALSE)
+	library(furrr, quietly = TRUE, warn.conflicts = FALSE)
+	library(gtools, quietly = TRUE, warn.conflicts = FALSE)	
+  
+	#define args
 	filename <- args[1]
 	id_col <- args[2]
 	cores <- args[3]
 	minl <- args[4]
 	maxl <- args[5]
+	sup_thr <- args[6]
 
-
-	id <- read_tsv(filename) %>%
-		as.data.frame() %>%
-		pull(id_col)
+  #convert to presence absence
+	df <- read_tsv(filename,show_col_types = FALSE) %>%
+	  imap_dfc(~if(is.numeric(.x)){ifelse(.x > 0, 1, 0)} else(.x))
 	
+	#calculate single support and filter to threshold
+	df_filtered <- calc_support(df, id_col = id_col, support_threshold = sup_thr)
+	
+	#pull id column
+	id <- df_filtered %>% pull(id_col)
+	
+	#set up multicore processing
 	plan(multisession, workers = cores)
 
 	sets <- future_map(.x = seq(minl,maxl), ~combinations(length(id), .x, id))
