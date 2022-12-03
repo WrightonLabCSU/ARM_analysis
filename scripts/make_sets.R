@@ -65,7 +65,7 @@ main <- function(){
 	#set up multicore processing
 	plan(multisession, workers = cores)
 
-	sets <- future_map(.x = seq(minl,maxl), ~combinations(length(id), .x, id))
+	sets <- future_map(.x = seq(minl,maxl), ~permutations(length(id), .x, id))
 	
 	
 	sets_vect <- c()
