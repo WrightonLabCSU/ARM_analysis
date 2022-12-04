@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
 #support function
+#calculates the frequency of each individual taxa in the feature table and filters by the support threshold
 calc_support <- function(featuretable, id_col, support_threshold){
   ft <- as.data.frame(featuretable) %>%
     select(-all_of(id_col))

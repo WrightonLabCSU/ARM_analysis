@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-#support function
+#support function calculates support support(A-->B) = num samples containing A and B / total number of samples
 calc_support <- function(string, ft_pa, id_col){
   rule <- unlist(str_split(string, ";"))
   freq_table <- ft_pa %>%
@@ -10,25 +10,32 @@ calc_support <- function(string, ft_pa, id_col){
     as.numeric() %>%
     table()
   
-  numerator <- freq_table[as.character(length(rule))]
+  numerator <- freq_table[as.character(max(as.numeric(names(freq_table)))-1)]
   
   return(numerator/(ncol(ft_pa) - 1))
 }
 
-#add support column to rule dataframe
+#calls support function
+#add support column to rule dataframe and filter sets based on support threshold
 add_support_filter <- function(ft, rule_df, sets, id_col, cores, threshold){
   
   plan(multisession, workers = cores)
-  support <- future_map(sets, ~calc_support(.x, ft, id_col)) 
+  support <- future_map_dbl(sets, ~calc_support(.x, ft, id_col)) 
   
   support_rule_df <- cbind(support, rule_df) %>%
-    filter(support >= threshold)
+    filter(support >= threshold) 
   
   return(support_rule_df)
 }
 
-#confidence function
+#confidence function, calculates confidence, confidence(A-->B) = all samples containing A and B / samples contianing A
+#takes present absent dataframe with support column added then calculates the confidence of the sets. 
+#the last taxa in each set is the consequent while all taxa are taken as antecedents
 calc_confidence <- function(rule_support, ante_vect, ft_pa, id_col){
+  #rule_support = vector of antecedent support values
+  #ft_pa = original present absent feature table with 1 taxa per row
+  #ante_vect = string of antecedents separated by ;
+  
   freq_rule <- rule_support*(ncol(ft_pa)-1)
   
   freq_ante_vect <- ft_pa %>%
@@ -127,7 +134,8 @@ main <- function(){
     future_map_chr(~str_replace(.x, ";(?!.*;)", "  -->  ")) %>%
     str_split_fixed(., "  -->  ", n = 2) %>%
     as.data.frame() %>%
-    rename("antecedents" = "V1", "consequent" = "V2")
+    select("antecedents" = "V1", "consequent" = "V2") %>%
+    cbind(., sets)
   
 }
 
