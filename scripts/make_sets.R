@@ -65,9 +65,11 @@ main <- function(){
 	#set up multicore processing
 	plan(multisession, workers = cores)
 
-	sets <- future_map(.x = seq(minl,maxl), ~permutations(length(id), .x, id))
+	sets <- future_map(.x = seq(minl,maxl), 
+	                   ~gtools::permutations(length(id), .x, id),
+	                   repeats.allowed = FALSE)
 	
-	
+	#combining each element of the set into one string
 	sets_vect <- c()
   	for(i in seq_along(sets)){
     		add <- sets[[i]] %>%
