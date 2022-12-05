@@ -64,7 +64,7 @@ Activate conda environment
 conda activate ARM_env
 ```
 
-Filter feature table to frequent taxa (filter_to_frequent.R)[/scripts/filter_to_frequent.R]
+Filter feature table to frequent taxa [filter_to_frequent.R](/scripts/filter_to_frequent.R)
 ```console
 foo@bar:~$ Rscript filter_to_frequent.R --help
 
@@ -83,7 +83,7 @@ Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
 ```
 The above command converts the supplied feature table to present absent format and filters the table to include taxa in at least 50% of the samples. It creates the file `../data/ft_pa_thrshld{threshold}.tsv`
 
-Produce list of taxa sets
+Produce list of taxa sets [make_sets.R](/scripts/make_sets.R)
 ```console
 foo@bar:~$ Rscript make_sets.R --help
 
@@ -115,7 +115,7 @@ b;c;a<br />
 c;a;b<br />
 c;b;a<br />
 
-Calculate support, confidence, and lift
+Calculate support, confidence, and lift [calc_metrics.R](/scripts/calc_metrics.R)
 ```console
 foo@bar:~$ Rscript calc_metrics.R --help
 
