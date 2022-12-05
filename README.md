@@ -65,6 +65,10 @@ conda activate ARM_env
 ```
 
 Filter feature table to frequent taxa
+```console
+foo@bar:~$ Rscript filter_to_frequent.R --help
+
+```
 ```bash
 Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
 ```
@@ -72,7 +76,7 @@ The above command converts the supplied feature table to present absent format a
 
 Produce list of taxa sets
 ```bash
-Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv 0.5 > path_to_sets/sets.txt
+Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv id 10 3 3 0.5 > path_to_sets/sets.txt
 ```
 The above command filters a feature table to a given threshold (taxa must appear in {threshold} proportion of samples). This command can be run without the filter_to_frequent.R preprocessing step if desired. The above command takes the filtered feature table and produces every permutation of individual taxa with each other separated by ; and outputs to stdout.<br />
 
