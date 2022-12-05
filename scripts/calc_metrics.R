@@ -115,10 +115,8 @@ main <- function(){
                   "\t[2] path to sets file single column tsv of feature combinations",
                   "\t[3] id column name in feature table",
                   "\t[4] number of cores",
-                  "\t[5] minimum number of items in set",
-                  "\t[6] maximum number of items in set",
-                  "\t[7] support threshold (0-1)",
-                  "\t[8] outfile name",
+                  "\t[5] support threshold (0-1)",
+                  "\t[6] outfile name",
                   "Output to file in ../data",
                   "\n")
     
@@ -145,10 +143,8 @@ main <- function(){
   sets_file <- args[2]
   id_col <- args[3]
   cores <- args[4]
-  minl <- args[5]
-  maxl <- args[6]
-  sup_thr <- args[7]
-  out_name <- args[8]
+  sup_thr <- args[5]
+  out_name <- args[6]
   
   #read in files
   df <- read_tsv(filename,show_col_types = FALSE) %>%
