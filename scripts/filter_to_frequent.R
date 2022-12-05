@@ -53,7 +53,7 @@ main <- function(){
   threshold <- args[2]
   
   #read in data
-  df_out <- read_tsv(filename)
+  df_out <- read_tsv(filename,show_col_types = FALSE)
 
   #set threshold number
   numeric_col_num <- ncol(df_out) -1
