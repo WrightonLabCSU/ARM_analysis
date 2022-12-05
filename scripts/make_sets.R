@@ -9,7 +9,7 @@ calc_support <- function(featuretable, id_col, support_threshold){
   support <- apply(ft, 1, function(x) sum(x)/ncol(ft))
   
   out_ft <- cbind(support, featuretable) %>%
-    filter(support >= support_threshold)
+    filter(support >= (support_threshold))
   
   return(out_ft)
 }
@@ -69,7 +69,7 @@ main <- function(){
 	plan(multisession, workers = cores)
 
 	sets <- future_map(.x = seq(minl,maxl), 
-	                   ~gtools::permutations(length(id), .x, id),
+	                   ~permutations(length(id), .x, id),
 	                   repeats.allowed = FALSE)
 	
 	#combining each element of the set into one string
