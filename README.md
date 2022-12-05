@@ -12,7 +12,7 @@ Briefly, association rule mining (aka. market basket analysis)  if a method of m
 | Taxa# | ... | ... | ...  | ... | .... |
 
 We would like to know if any of the taxa are associated with each other based on their presence in each sample from our dataset.
-ARM uses the metrics support, confidence, and lift to determine interesting associations. For instance, maybe we want to know if Taxa 1 is associated with Taxa2.
+ARM uses the metrics support, confidence, and lift to determine interesting associations. For instance, maybe we want to know if Taxa1 is associated with Taxa2.
 We can define an association rule
 
 **$Taxa1 \rightarrow Taxa2$**
@@ -28,5 +28,22 @@ $$ ExpectedConfidence(Taxa1 \rightarrow Taxa2) = {{Freq(Taxa2)} \over N} $$
 
 $$ Lift(Taxa1 \rightarrow Taxa2) = {{Confidence} \over ExpectedConfidence} $$
 
-When lift is greater than 1 there is a possitive association between the Antecedent/s and the Consequent. 
+When lift is greater than 1 there is a positive association between the Antecedent/s and the Consequent.
+
+The feature table is converted to presence absence and the proportional metrics are calculated.
+
+| id    | s1  | s2  | s3  | s4  | s#   |
+|-------|-----|-----|-----|-----|------|
+| Taxa1 | 1   | 0   | 1   | 1   | ...  |
+| Taxa2 | 0   | 0   | 1   | 1   | ...  |
+| Taxa3 | 1   | 1   | 1   | 0   | ...  |
+| Taxa# | ... | ... | ... | ... | .... |
+
+**$Support(Taxa1 \rightarrow Taxa2)$ = 2/4 = 0.5**
+**$Confidence(Taxa1 \rightarrow Taxa2)$ = 2/3 = 0.67**
+**$ExpectedConfidence(Taxa1 \rightarrow Taxa2)$ = 2/4 = 0.5**
+**$Lift(Taxa1 \rightarrow Taxa2)$ = 0.67/0.5 = 1.34**
+
+
+
 
