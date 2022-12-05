@@ -2,7 +2,7 @@
 This Repository contains functions to perform association rule mining on microbiome datasets with R scripts designed to be called on the command-line.
 
 ## Association Rule Mining (ARM)
-Briefly, association rule mining (aka. market basket analysis)  is a method of mining data for associations between elements. In the context of microbial ecology, ARM can be used to find associations between taxa from an array of samples within an experiment. Consider the following feature table:
+Association rule mining (aka. market basket analysis)  is a method of mining data for associations between elements. In the context of microbial ecology, ARM can be used to find associations between taxa from an array of samples within an experiment. Consider the following feature table:
 
 | id    | s1  | s2  | s3   | s4  | s#   |
 |-------|-----|-----|------|-----|------|
