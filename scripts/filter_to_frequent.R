@@ -50,10 +50,14 @@ main <- function(){
   filename <- args[1]
   threshold <- args[2]
   
+  #read in data
+  df_out <- read_tsv(filename)
+
   #set threshold number
-  num <- round(threshold * (ncol(test_df) -1))
+  numeric_col_num <- ncol(df_out) -1
+  num <- round(as.numeric(threshold) * numeric_col_num)
   
-  df_out <- read_tsv(filename)  %>%
+  df_out <- df_out %>%
     imap_dfc(~if(is.numeric(.x)){ifelse(.x > 0, 1, 0)} else(.x)) %>%
     mutate(total = sum(c_across(where(is.numeric)))) %>%
     arrange(desc(total)) %>%
