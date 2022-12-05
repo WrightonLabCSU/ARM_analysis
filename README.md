@@ -20,5 +20,5 @@ We can define an association rule
 where Taxa1 is termed the *Antecedent* and Taxa2 the *Consequent*.
 The association rule is read *"Given Taxa1, how often does Taxa2 occur"*, and support, confidence, and lift are calculated as follows:
 
-$Support(Taxa1 \rightarrow Taxa2) = Samples Containing Taxa1 and Taxa2 \over Total Number of Samples$
+$Support(Taxa1 \rightarrow Taxa2) = {Samples Containing Taxa1 and Taxa2} \over Total Number of Samples$
 
