@@ -20,5 +20,13 @@ We can define an association rule
 where Taxa1 is termed the *Antecedent* and Taxa2 the *Consequent*.
 The association rule is read *"Given Taxa1, how often does Taxa2 occur"*, and support, confidence, and lift are calculated as follows:
 
-$$ Support(Taxa1 \rightarrow Taxa2) = {{Samples Containing Taxa1 and Taxa2} \over Total Number of Samples} $$
+$$ Support(Taxa1 \rightarrow Taxa2) = {{Freq(Taxa1,Taxa2)} \over N} $$
+
+$$ Confidence(Taxa1 \rightarrow Taxa2) = {{Freq(Taxa1,Taxa2)} \over Freq(Taxa1)} $$
+
+$$ ExpectedConfidence(Taxa1 \rightarrow Taxa2) = {{Freq(Taxa2)} \over N} $$
+
+$$ Lift(Taxa1 \rightarrow Taxa2) = {{Confidence} \over ExpectedConfidence} $$
+
+When lift is greater than 1 there is a possitive association between the Antecedent/s and the Consequent. 
 
