@@ -127,10 +127,8 @@ Function calculates support, confidence, and lift for ruleset
 	[2] path to sets file single column tsv of feature combinations
 	[3] id column name in feature table
 	[4] number of cores
-	[5] minimum number of items in set
-	[6] maximum number of items in set
-	[7] support threshold (0-1)
-	[8] outfile name
+	[5] support threshold (0-1)
+	[6] outfile name
 Output to file in ../data
 
 
@@ -138,7 +136,7 @@ Execution halted
 
 ```
 ```bash
-Rscript calc_metrics.R ../data/ft_pa_thrshld0.5.tsv path_to_sets/sets.txt id 10 3 6 0.5 lift_support_confidence_rules.tsv
+Rscript calc_metrics.R ../data/ft_pa_thrshld0.5.tsv path_to_sets/sets.txt id 10 0.5 lift_support_confidence_rules.tsv
 ```
 The above command produces a dataframe named lift_support_confidence_rules.tsv in the data directory. The dataframe includes all rulesets, antacedents, consequents, rule support, rule confidence, rule expected confidence, and rule lift
 
