@@ -39,9 +39,9 @@ The feature table is converted to presence absence and the proportional metrics 
 | Taxa3 | 1   | 1   | 1   | 0   | ...  |
 | Taxa# | ... | ... | ... | ... | .... |
 
-**$Support(Taxa1 \rightarrow Taxa2)$ = 2/4 = 0.5** \n
-**$Confidence(Taxa1 \rightarrow Taxa2)$ = 2/3 = 0.67** \n
-**$ExpectedConfidence(Taxa1 \rightarrow Taxa2)$ = 2/4 = 0.5** \n
+**$Support(Taxa1 \rightarrow Taxa2)$ = 2/4 = 0.5** <br />
+**$Confidence(Taxa1 \rightarrow Taxa2)$ = 2/3 = 0.67** <br />
+**$ExpectedConfidence(Taxa1 \rightarrow Taxa2)$ = 2/4 = 0.5** <br />
 **$Lift(Taxa1 \rightarrow Taxa2)$ = 0.67/0.5 = 1.34**
 
 
