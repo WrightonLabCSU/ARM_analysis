@@ -68,6 +68,15 @@ Filter feature table to frequent taxa
 ```console
 foo@bar:~$ Rscript filter_to_frequent.R --help
 
+
+Function filters feature table to frequent taxa
+	Positional arguments are:
+	[1] path to file (tsv)
+	[2] threshold (0-1)
+Output to file in ../data dir
+
+
+
 ```
 ```bash
 Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
