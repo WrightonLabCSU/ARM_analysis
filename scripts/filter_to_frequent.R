@@ -59,7 +59,7 @@ main <- function(){
   
   df_out <- df_out %>%
     imap_dfc(~if(is.numeric(.x)){ifelse(.x > 0, 1, 0)} else(.x)) %>%
-    mutate(total = sum(c_across(where(is.numeric)))) %>%
+    mutate(total = rowSums(across(where(is.numeric)))) %>%
     arrange(desc(total)) %>%
     filter(total >= num) %>%
     select(-total)
