@@ -12,7 +12,7 @@ Briefly, association rule mining (aka. market basket analysis)  is a method of m
 | Taxa# | ... | ... | ...  | ... | .... |
 
 We would like to know if any of the taxa are associated with each other based on their presence in each sample from our dataset.
-ARM uses the metrics support, confidence, and lift to determine interesting associations. For instance, maybe we want to know if Taxa1 is associated with Taxa2.
+ARM uses the metrics **support**, **confidence**, and **lift** to determine interesting associations. For instance, maybe we want to know if Taxa1 is associated with Taxa2.
 We can define an association rule
 
 **$Taxa1 \rightarrow Taxa2$**
@@ -30,6 +30,7 @@ $$ Lift(Taxa1 \rightarrow Taxa2) = {{Confidence} \over ExpectedConfidence} $$
 
 When lift is greater than 1 there is a positive association between the Antecedent/s and the Consequent.
 
+## Implementation  
 The feature table is converted to presence absence and the proportional metrics are calculated.
 
 | id    | s1  | s2  | s3  | s4  | s#   |
@@ -88,7 +89,7 @@ Produce list of taxa sets [make_sets.R](/scripts/make_sets.R)
 foo@bar:~$ Rscript make_sets.R --help
 
 
-Function creats all possible combinations of id's in id column
+Function creates all possible combinations of id's in id column
 	Positional arguments are:
 	[1] path to file (tsv)
 	[2] id column name
@@ -105,7 +106,7 @@ Execution halted
 ```bash
 Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv id 10 3 3 0.5 > path_to_sets/sets.txt
 ```
-The above command filters a feature table to a given threshold (taxa must appear in {threshold} proportion of samples). This command can be run without the filter_to_frequent.R preprocessing step if desired. The above command takes the filtered feature table and produces every permutation of individual taxa with each other separated by ; and outputs to stdout.<br />
+The above command filters a feature table to a given threshold (taxa must appear in {threshold} proportion of samples). This command can be run without the filter_to_frequent.R preprocessing step if desired. The above command takes the filtered feature table and produces every permutation of individual taxa with each other separated by ";" and outputs to stdout.<br />
 
 example output with minl and maxl set to 3:<br />
 a;b;c<br />
@@ -139,6 +140,6 @@ Execution halted
 ```bash
 Rscript calc_metrics.R ../data/ft_pa_thrshld0.5.tsv path_to_sets/sets.txt id 10 3 6 0.5 lift_support_confidence_rules.tsv
 ```
-
+The above command produces a dataframe named lift_support_confidence_rules.tsv in the data directory. The dataframe includes all rulesets, antacedents, consequents, rule support, rule confidence, rule expected confidence, and rule lift 
 
 

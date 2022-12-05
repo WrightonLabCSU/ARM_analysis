@@ -19,7 +19,7 @@ main <- function(){
 	args <- commandArgs(trailingOnly = TRUE)
   if(args[1] == "--help" | args[1] == "-h"){
     help_msg <- c("\n",
-                  "Function creats all possible combinations of id's in id column",
+                  "Function creates all possible combinations of id's in id column",
                   "\tPositional arguments are:",
                   "\t[1] path to file (tsv)",
                   "\t[2] id column name",
