@@ -72,6 +72,22 @@ The above command converts the supplied feature table to present absent format a
 
 Produce list of taxa sets
 ```bash
-Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv 0.5
+Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv 0.5 > path_to_sets/sets.txt
 ```
+The above command filters a feature table to a given threshold (taxa must appear in {threshold} proportion of samples). This command can be run without the filter_to_frequent.R preprocessing step if desired. The above command takes the filtered feature table and produces every permutation of individual taxa with each other separated by ; and outputs to stdout.<br />
+
+example output with minl and maxl set to 3:<br />
+a;b;c<br />
+a;c;b<br />
+b;a;c<br />
+b;c;a<br />
+c;a;b<br />
+c;b;a<br />
+
+Calculate support, confidence, and lift
+```bash
+Rscript calc_metrics.R ../data/ft_pa_thrshld0.5.tsv path_to_sets/sets.txt id 10 3 6 0.5 lift_support_confidence_rules.tsv
+```
+
+
 
