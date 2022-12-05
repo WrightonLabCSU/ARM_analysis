@@ -13,7 +13,7 @@ Briefly, association rule mining (aka. market basket analysis)  if a method of m
 
 We would like to know if any of the taxa are associated with each other based on their presence in each sample from our dataset.
 ARM uses the metrics support, confidence, and lift to determine interesting associations. For instance, maybe we want to know if Taxa 1 is associated with Taxa2.
-We can define an association rule **Taxa1 \rightarrow Taxa2** where Taxa1 is termed the *Antecedent* and Taxa2 the *Consequent*. The association rule is read *"Given Taxa1, how often does Taxa2 occur"*, and support, confidence, and lift are calculated as follows:
+We can define an association rule **$Taxa1 \rightarrow Taxa2$** where Taxa1 is termed the *Antecedent* and Taxa2 the *Consequent*. The association rule is read *"Given Taxa1, how often does Taxa2 occur"*, and support, confidence, and lift are calculated as follows:
 
-**Support(Taxa1 --> Taxa2) = Samples
+$Support(Taxa1 --> Taxa2) = Samples
 
