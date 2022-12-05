@@ -51,4 +51,23 @@ wget https://github.com/ileleiwi/ARM_analysis/blob/main/environment.yml
 conda env create -f environment.yml -n ARM_env
 ```
 
+Clone the ARM_analysis github repository to your computer
+```bash
+git clone https://github.com/ileleiwi/ARM_analysis
+```
+Add your feature table to the data directory.<br />
+Feature table should be a tsv file with taxa as observations and samples as variables<br />
+*Note: set permutations quickly become computationally unwieldy as observation number increases and number of taxa in each set increases (minl and maxl)
+
+Activate conda environment
+```bash
+conda activate ARM_env
+```
+
+Filter feature table to frequent taxa
+```bash
+Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
+```
+The above command converts the supplied feature table to present absent format and filters the table to include taxa in at least 50% of the samples. It creates the file `../data/ft_pa_thrshld{threshold}.tsv`
+
 
