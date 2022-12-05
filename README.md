@@ -64,7 +64,7 @@ Activate conda environment
 conda activate ARM_env
 ```
 
-Filter feature table to frequent taxa
+Filter feature table to frequent taxa (filter_to_frequent.R)[/scripts/filter_to_frequent.R]
 ```console
 foo@bar:~$ Rscript filter_to_frequent.R --help
 
