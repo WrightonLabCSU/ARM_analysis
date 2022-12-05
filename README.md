@@ -70,4 +70,8 @@ Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
 ```
 The above command converts the supplied feature table to present absent format and filters the table to include taxa in at least 50% of the samples. It creates the file `../data/ft_pa_thrshld{threshold}.tsv`
 
+Produce list of taxa sets
+```bash
+Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv 0.5
+```
 
