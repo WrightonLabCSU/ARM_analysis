@@ -76,7 +76,7 @@ Function filters feature table to frequent taxa
 Output to file in ../data dir
 
 
-
+Execution halted
 ```
 ```bash
 Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
@@ -84,6 +84,24 @@ Rscript filter_to_frequent.R ../data/feature_table.tsv 0.5
 The above command converts the supplied feature table to present absent format and filters the table to include taxa in at least 50% of the samples. It creates the file `../data/ft_pa_thrshld{threshold}.tsv`
 
 Produce list of taxa sets
+```console
+foo@bar:~$ Rscript make_sets.R --help
+
+
+Function creats all possible combinations of id's in id column
+	Positional arguments are:
+	[1] path to file (tsv)
+	[2] id column name
+	[3] number of cores
+	[4] minimum number of items in set
+	[5] maximum number of items in set
+	[6] support threshold (0-1)
+Output to stdout
+
+
+Execution halted
+
+```
 ```bash
 Rscript make_sets.R ../data/ft_pa_thrshld0.5.tsv id 10 3 3 0.5 > path_to_sets/sets.txt
 ```
@@ -98,6 +116,26 @@ c;a;b<br />
 c;b;a<br />
 
 Calculate support, confidence, and lift
+```console
+foo@bar:~$ Rscript calc_metrics.R --help
+
+
+Function calculates support, confidence, and lift for ruleset
+	Positional arguments are:
+	[1] path to file present absent feature table (tsv)
+	[2] path to sets file single column tsv of feature combinations
+	[3] id column name in feature table
+	[4] number of cores
+	[5] minimum number of items in set
+	[6] maximum number of items in set
+	[7] support threshold (0-1)
+	[8] outfile name
+Output to file in ../data
+
+
+Execution halted
+
+```
 ```bash
 Rscript calc_metrics.R ../data/ft_pa_thrshld0.5.tsv path_to_sets/sets.txt id 10 3 6 0.5 lift_support_confidence_rules.tsv
 ```
