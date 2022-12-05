@@ -44,7 +44,9 @@ main <- function(){
   }
   
   #prep environment
-  library(tidyverse, quietly = TRUE, warn.conflicts = FALSE)
+  suppressPackageStartupMessages({
+    library(tidyverse, quietly = TRUE, warn.conflicts = FALSE)
+  })
 
   #define args
   filename <- args[1]

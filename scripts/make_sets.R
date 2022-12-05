@@ -41,10 +41,12 @@ main <- function(){
   }
 
 	#prep environment
-	library(tidyverse, quietly = TRUE, warn.conflicts = FALSE)
-	library(furrr, quietly = TRUE, warn.conflicts = FALSE)
-	library(gtools, quietly = TRUE, warn.conflicts = FALSE)	
-  
+	suppressPackageStartupMessages({
+	  library(tidyverse, quietly = TRUE, warn.conflicts = FALSE)
+	  library(furrr, quietly = TRUE, warn.conflicts = FALSE)
+	  library(gtools, quietly = TRUE, warn.conflicts = FALSE)	
+	})
+	
 	#define args
 	filename <- args[1]
 	id_col <- args[2]
