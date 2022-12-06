@@ -142,7 +142,7 @@ main <- function(){
   filename <- args[1]
   sets_file <- args[2]
   id_col <- args[3]
-  cores <- args[4]
+  cores <- args[4] %>% as.numeric()
   sup_thr <- args[5]
   out_name <- args[6]
   
