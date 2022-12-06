@@ -1,5 +1,18 @@
 #!/usr/bin/env Rscript
 
+
+#produce rule set dataframe col1 = antecedents, col2 = consequent, col3 = sets
+make_rules <- function(sets, cores){
+  plan(multisession, workers = cores)
+  out <- sets %>%
+    future_map_chr(~str_replace(.x, ";(?!.*;)", "  -->  ")) %>%
+    str_split_fixed(., "  -->  ", n = 2) %>%
+    as.data.frame() %>%
+    select("antecedents" = "V1", "consequent" = "V2") %>%
+    cbind(., sets)
+  return(out)
+}
+
 #support function calculates support support(A-->B) = num samples containing A and B / total number of samples
 calc_support <- function(string, ft_pa, id_col){
   rule <- unlist(str_split(string, ";"))
@@ -154,16 +167,10 @@ main <- function(){
     pull(X1)
   
   #produce rule set dataframe col1 = antecedents, col2 = consequent, col3 = sets
-  plan(multisession, workers = cores)
-  ante_conse_df <- sets %>%
-    future_map_chr(~str_replace(.x, ";(?!.*;)", "  -->  ")) %>%
-    str_split_fixed(., "  -->  ", n = 2) %>%
-    as.data.frame() %>%
-    select("antecedents" = "V1", "consequent" = "V2") %>%
-    cbind(., sets)
+  ante_conse_df <- make_rules(sets, cores)
   
   #calculate support
-  supp_df <- add_support_filter(df, ante_conse_df, cores, sup_thr)
+  supp_df <- add_support_filter(df, ante_conse_df, id_col, cores, sup_thr)
   #calculate confidence
   conf_supp_df <- add_confidence(df, supp_df, id_col, cores)
   #calculate expected confidence
